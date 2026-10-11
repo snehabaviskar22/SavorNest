@@ -3,7 +3,6 @@
 @section('title', $recipe->name . ' | SavorNest')
 
 @section('content')
-<!-- Recipe Image Hero -->
 <div class="mb-5 position-relative">
     <div class="rounded-5 overflow-hidden shadow-sm" style="height: 60vh; min-height: 400px; max-height: 600px;">
         <img src="{{ $recipe->image ? asset('storage/' . $recipe->image) : 'https://placehold.co/1200x600/F7F5F1/171717?text=Recipe+Image' }}" alt="{{ $recipe->name }}" class="w-100 h-100" style="object-fit: cover;">
@@ -13,7 +12,6 @@
 <div class="row justify-content-center mb-huge">
     <div class="col-lg-10">
         
-        <!-- Header & Meta -->
         <div class="text-center mb-5 pb-4 border-bottom border-light">
             <span class="text-uppercase fw-bold text-muted-custom mb-3 d-inline-block" style="letter-spacing: 0.1em; font-size: 0.85rem;">{{ $recipe->category->name }}</span>
             <h1 class="editorial-font display-3 text-dark mb-4" style="line-height: 1.1;">{{ $recipe->name }}</h1>
@@ -33,7 +31,6 @@
                 @endif
             </div>
 
-            <!-- Actions -->
             <div class="d-flex justify-content-center align-items-center gap-4">
                 @auth
                     @if(Auth::id() !== $recipe->user_id)
@@ -79,17 +76,14 @@
             </div>
         </div>
         
-        <!-- Description -->
         <div class="mb-huge text-center mx-auto" style="max-width: 800px;">
             <p class="fs-4 lh-lg text-dark" style="font-weight: 300;">
                 {{ $recipe->description }}
             </p>
         </div>
 
-        <!-- Recipe Content Split -->
         <div class="row g-lg-5">
             
-            <!-- Ingredients Column -->
             <div class="col-lg-4 mb-5 mb-lg-0">
                 <div class="bg-soft p-4 p-lg-5 rounded-4 sticky-top" style="top: 100px;">
                     <h3 class="editorial-font mb-4 pb-3 border-bottom border-light">Ingredients</h3>
@@ -104,7 +98,6 @@
                 </div>
             </div>
             
-            <!-- Preparation Column -->
             <div class="col-lg-8">
                 <div class="ps-lg-4">
                     <h3 class="editorial-font mb-5 pb-3 border-bottom border-light">Preparation</h3>
@@ -127,7 +120,6 @@
             </div>
         </div>
         
-        <!-- Author Profile Footer -->
         <div class="mt-huge pt-5 border-top border-light text-center">
             <h4 class="editorial-font mb-4 text-muted-custom">Recipe by</h4>
             <div class="d-flex flex-column align-items-center">

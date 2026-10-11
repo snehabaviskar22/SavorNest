@@ -4,23 +4,19 @@
 
 @section('content')
 
-<!-- Header Section -->
 <div class="text-center pt-5 pb-4 mb-4">
     <h1 class="editorial-font display-4 mb-3">Explore Recipes</h1>
     <p class="text-muted-custom lead mx-auto" style="max-width: 600px;">Find your next culinary adventure. Filter by cuisine, category, or search for something specific.</p>
 </div>
 
-<!-- Horizontal Filter Bar -->
 <div class="bg-surface rounded-5 p-4 mb-huge shadow-sm border border-light">
     <form action="{{ route('recipes.index') }}" method="GET" class="row g-3 align-items-end">
         
-        <!-- Search -->
         <div class="col-12 col-md-4">
             <label class="form-label text-muted-custom small text-uppercase fw-semibold" style="letter-spacing: 0.05em;">Search</label>
             <input type="search" name="search" class="form-control" placeholder="Search recipes..." value="{{ request('search') }}">
         </div>
         
-        <!-- Category -->
         <div class="col-6 col-md-2">
             <label class="form-label text-muted-custom small text-uppercase fw-semibold" style="letter-spacing: 0.05em;">Category</label>
             <select class="form-select" name="category" onchange="this.form.submit()">
@@ -33,7 +29,6 @@
             </select>
         </div>
         
-        <!-- Cuisine -->
         <div class="col-6 col-md-2">
             <label class="form-label text-muted-custom small text-uppercase fw-semibold" style="letter-spacing: 0.05em;">Cuisine</label>
             <select class="form-select" name="cuisine" onchange="this.form.submit()">
@@ -46,7 +41,6 @@
             </select>
         </div>
         
-        <!-- Food Type -->
         <div class="col-6 col-md-2">
             <label class="form-label text-muted-custom small text-uppercase fw-semibold" style="letter-spacing: 0.05em;">Type</label>
             <select class="form-select" name="food_type" onchange="this.form.submit()">
@@ -57,7 +51,6 @@
             </select>
         </div>
         
-        <!-- Sort -->
         <div class="col-6 col-md-2">
             <label class="form-label text-muted-custom small text-uppercase fw-semibold" style="letter-spacing: 0.05em;">Sort</label>
             <select class="form-select" name="sort" onchange="this.form.submit()">
@@ -66,7 +59,6 @@
             </select>
         </div>
         
-        <!-- Submit is hidden because onchange submits, but we need a submit button for the search input if they hit enter or click it, or we can just rely on the search input's native enter behavior. Let's add a visual submit just in case, but keep it minimal. Or a clear button. -->
         <div class="col-12 mt-4 text-center d-md-none">
             <button type="submit" class="btn btn-primary w-100">Apply Filters</button>
         </div>
@@ -79,7 +71,6 @@
     @endif
 </div>
 
-<!-- Recipe Grid -->
 <div>
     @if(request('search'))
         <div class="mb-5 text-center">

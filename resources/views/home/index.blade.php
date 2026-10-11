@@ -2,7 +2,6 @@
 
 @section('content')
 
-<!-- Editorial Hero Section -->
 <div class="row align-items-center mb-huge pt-4">
     <div class="col-lg-5 pe-lg-5 mb-5 mb-lg-0">
         <h1 class="editorial-font display-3 fw-bold mb-4" style="line-height: 1.1;">Discover recipes worth making.</h1>
@@ -19,13 +18,11 @@
     <div class="col-lg-7">
         <div class="position-relative">
             <img src="{{ asset('storage/homeimgs/indian food.jpg') }}" alt="Delicious Food" class="img-fluid img-cover-rounded shadow-sm" style="height: 600px;">
-            <!-- Decorative Accent -->
             <div class="position-absolute bg-soft rounded-circle" style="width: 150px; height: 150px; bottom: -30px; left: -30px; z-index: -1;"></div>
         </div>
     </div>
 </div>
 
-<!-- Categories -->
 @php
     $categoryImages = [
         'Breakfast' => 'homeimgs/categories/breakfast.jpg',
@@ -37,7 +34,6 @@
     ];
 @endphp
 
-<!-- Categories -->
 @if($categories->count() > 0)
 <div class="mb-huge">
     <div class="d-flex justify-content-between align-items-end mb-5">
@@ -72,7 +68,6 @@
 </div>
 @endif
 
-<!-- Popular Recipes -->
 @if($featuredRecipes->count() > 0)
 <div class="mb-huge">
     <div class="d-flex justify-content-between align-items-end mb-5">
@@ -113,7 +108,6 @@
 </div>
 @endif
 
-<!-- Call to Action -->
 <div class="bg-soft rounded-5 p-5 text-center my-5 shadow-sm">
     <div class="py-5 mx-auto" style="max-width: 600px;">
         <h2 class="editorial-font display-5 mb-4">Got a recipe to share?</h2>

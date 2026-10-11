@@ -1,21 +1,16 @@
-/* 
-  SavorNest Premium Editorial Theme
-  A clean, modern, and spacious aesthetic.
-*/
-
 :root {
   /* Core Colors */
-  --sn-bg: #FCFBF8;          /* Warm Ivory Background */
-  --sn-surface: #FFFFFF;     /* Pure White */
-  --sn-surface-soft: #F7F5F1;/* Soft Grey/Beige Surface */
+  --sn-bg: #FCFBF8;
+  --sn-surface: #FFFFFF;
+  --sn-surface-soft: #F7F5F1;
   
   /* Text Colors */
-  --sn-text-main: #171717;   /* Charcoal/Almost Black */
-  --sn-text-muted: #6B6864;  /* Medium Grey */
-  --sn-text-light: #A09E9B;  /* Light Grey */
+  --sn-text-main: #171717;
+  --sn-text-muted: #6B6864;
+  --sn-text-light: #A09E9B;
   
   /* Borders & UI Chrome */
-  --sn-border: #E9E6E1;      /* Very Light Beige/Grey */
+  --sn-border: #E9E6E1;
   --sn-border-focus: #D3CDC4;
   
   /* Accents */

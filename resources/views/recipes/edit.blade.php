@@ -15,7 +15,6 @@
             @csrf
             @method('PUT')
             
-            <!-- 1. Basic Info -->
             <div class="bg-surface rounded-5 p-4 p-md-5 mb-5 shadow-sm border border-light">
                 <h3 class="editorial-font mb-4 pb-3 border-bottom border-light">1. The Basics</h3>
                 
@@ -80,7 +79,6 @@
                 </div>
             </div>
             
-            <!-- 2. Ingredients -->
             <div class="bg-surface rounded-5 p-4 p-md-5 mb-5 shadow-sm border border-light">
                 <div class="d-flex justify-content-between align-items-center mb-4 pb-3 border-bottom border-light">
                     <h3 class="editorial-font mb-0">2. Ingredients</h3>
@@ -88,7 +86,6 @@
                 </div>
                 
                 <div id="ingredientsContainer">
-                    <!-- Existing Ingredients -->
                     @foreach($recipe->ingredients as $index => $ingredient)
                     <div class="row g-3 align-items-end ingredient-row pb-3 mb-3 border-bottom border-light">
                         <div class="col-md-5">
@@ -114,7 +111,6 @@
                 @enderror
             </div>
             
-            <!-- 3. Preparation -->
             <div class="bg-surface rounded-5 p-4 p-md-5 mb-5 shadow-sm border border-light">
                 <div class="d-flex justify-content-between align-items-center mb-4 pb-3 border-bottom border-light">
                     <h3 class="editorial-font mb-0">3. Preparation</h3>
@@ -122,7 +118,6 @@
                 </div>
                 
                 <div id="stepsContainer">
-                    <!-- Existing Steps -->
                     @foreach($recipe->preparationSteps as $index => $step)
                     <div class="step-row d-flex flex-column flex-md-row gap-4 mb-4 pb-4 border-bottom border-light align-items-start">
                         <div class="flex-shrink-0 pt-2">
@@ -144,7 +139,6 @@
                 @enderror
             </div>
             
-            <!-- Submit -->
             <div class="d-flex justify-content-between align-items-center">
                 <a href="{{ route('recipes.show', $recipe) }}" class="btn btn-link text-muted-custom text-decoration-none">Cancel</a>
                 <button type="submit" class="btn btn-primary btn-lg px-5 py-3 shadow-sm text-uppercase fw-semibold" style="letter-spacing: 0.05em;">Update Recipe</button>
@@ -153,7 +147,6 @@
     </div>
 </div>
 
-<!-- Templates for JS -->
 <template id="ingredientTemplate">
     <div class="row g-3 align-items-end ingredient-row pb-3 mb-3 border-bottom border-light">
         <div class="col-md-5">

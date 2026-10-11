@@ -25,7 +25,6 @@ class AuthController extends Controller
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
 
-            // Check if user is banned
             if (Auth::user()->status === 'banned') {
                 Auth::logout();
                 $request->session()->invalidate();

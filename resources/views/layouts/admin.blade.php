@@ -5,15 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin - @yield('title', 'SavorNest')</title>
     
-    <!-- Google Fonts: Inter & Playfair Display -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
     
-    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     
-    <!-- Custom CSS -->
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     
     <style>
@@ -41,7 +38,6 @@
 </head>
 <body class="d-flex flex-column min-vh-100" style="background-color: var(--sn-bg);">
 
-    <!-- Admin Navbar -->
     <nav class="navbar navbar-expand-lg sticky-top py-3" style="background-color: var(--sn-surface); border-bottom: 1px solid var(--sn-border);">
         <div class="container-fluid px-4">
             <a class="navbar-brand editorial-font fw-bold" href="{{ route('admin.dashboard') }}">SavorNest Admin</a>
@@ -73,7 +69,6 @@
 
     <div class="container-fluid flex-grow-1 d-flex p-0">
         <div class="row w-100 m-0">
-            <!-- Sidebar -->
             <div class="col-md-3 col-lg-2 d-none d-md-block admin-sidebar p-3">
                 <h6 class="text-uppercase text-muted-custom fw-bold mb-3 px-3 mt-3" style="font-size: 0.75rem; letter-spacing: 0.05em;">Management</h6>
                 <ul class="nav flex-column">
@@ -113,9 +108,7 @@
                 </ul>
             </div>
 
-            <!-- Main Content -->
             <main class="col-md-9 col-lg-10 p-4 p-md-5">
-                <!-- Flash Messages -->
                 @if (session('success'))
                     <div class="alert alert-success alert-dismissible fade show shadow-sm border-0 rounded-4" role="alert">
                         {{ session('success') }}
@@ -146,7 +139,6 @@
         </div>
     </div>
 
-    <!-- Bootstrap Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     
     @yield('scripts')

@@ -6,7 +6,6 @@
 <div class="row justify-content-center mb-huge">
     <div class="col-lg-10">
         
-        <!-- Profile Header -->
         <div class="bg-surface rounded-5 shadow-sm border border-light overflow-hidden mb-huge">
             <div class="bg-soft" style="height: 200px;"></div>
             <div class="px-4 px-md-5 pb-5 position-relative">
@@ -48,7 +47,6 @@
             </div>
         </div>
 
-        <!-- User's Recipes -->
         <div class="d-flex justify-content-between align-items-center mb-5 pb-3 border-bottom border-light">
             <h3 class="editorial-font mb-0">Recipes by {{ $user->name }}</h3>
         </div>

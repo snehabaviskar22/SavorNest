@@ -16,7 +16,6 @@
             </div>
         </div>
 
-        <!-- Editorial Stats -->
         <div class="row g-4 mb-5">
             <div class="col-md-6">
                 <div class="bg-surface rounded-5 p-5 text-center shadow-sm border border-light h-100 d-flex flex-column justify-content-center align-items-center">
@@ -34,7 +33,6 @@
             </div>
         </div>
 
-        <!-- Recent Recipes -->
         <div class="bg-surface rounded-5 shadow-sm border border-light overflow-hidden">
             <div class="p-4 p-md-5 d-flex justify-content-between align-items-center border-bottom border-light">
                 <h4 class="editorial-font mb-0">Recent Recipes</h4>

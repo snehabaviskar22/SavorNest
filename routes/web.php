@@ -15,12 +15,6 @@ use App\Http\Controllers\Admin\AdminCategoryController;
 use App\Http\Controllers\Admin\AdminCuisineController;
 use App\Http\Controllers\Admin\AdminIngredientController;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-*/
-
 // Public
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/recipes', [RecipeController::class, 'index'])->name('recipes.index');

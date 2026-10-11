@@ -62,7 +62,6 @@
                     </td>
                 </tr>
 
-                <!-- Ban Modal -->
                 @if($user->role !== 'admin' && $user->status === 'active')
                 <div class="modal fade" id="banModal{{ $user->id }}" tabindex="-1">
                     <div class="modal-dialog">

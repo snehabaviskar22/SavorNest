@@ -23,7 +23,6 @@ class RecipeSeeder extends Seeder
         $oliveOil = Ingredient::where('name', 'Olive Oil')->first();
         $parmesan = Ingredient::where('name', 'Parmesan Cheese')->first();
 
-        // Recipe 1
         $recipe1 = Recipe::create([
             'user_id' => $user->id,
             'category_id' => $dinner->id,
@@ -49,7 +48,6 @@ class RecipeSeeder extends Seeder
             ['step_number' => 5, 'instruction' => 'Serve immediately, garnished with freshly grated Parmesan cheese.'],
         ]);
         
-        // Add a few likes
         $recipe1->likes()->create(['user_id' => User::where('role', 'admin')->first()->id]);
     }
 }
