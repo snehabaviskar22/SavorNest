@@ -1,198 +1,396 @@
-# SavorNest
+# SavorNest – Recipe Sharing & Management Platform
 
-SavorNest is a comprehensive web application for discovering, creating, and sharing culinary recipes.
+A full-stack recipe-sharing web application developed using **Laravel 12**, **PHP**, **MySQL/SQLite**, and **Blade Templates**. SavorNest enables users to discover, create, manage, and share recipes with detailed ingredients, quantities, and step-by-step preparation instructions. It also provides an administrative dashboard for managing recipes, users, categories, cuisines, and ingredients.
 
-## Overview
+---
 
-SavorNest provides a platform for food enthusiasts to share their favorite recipes and discover new ones. It solves the problem of organizing recipes with detailed ingredients, quantities, and step-by-step instructions. The application is intended for both casual home cooks looking for inspiration and experienced chefs wanting to catalog and share their creations. At a high level, users can browse categorized recipes, filter by cuisine or food type, and registered members can contribute their own recipes to the platform's growing database.
+# Objectives
 
-## Key Features
+The main objectives of this project are:
 
-* **Recipe Discovery & Search**: Users can search for recipes by name and filter results by category, cuisine, and food type (Vegetarian, Non-Vegetarian, Vegan). Results can be sorted by popularity or recency.
-* **Recipe Management**: Authenticated users can create, edit, and delete their own recipes. The creation process supports adding an image, dynamic ingredients with specific quantities and units, and sequential preparation steps.
-* **User Profiles**: Every user has a profile page displaying their bio, profile image, and a gallery of recipes they have published.
-* **Liking System**: Users can like their favorite recipes, which contributes to the recipe's overall popularity score.
-* **Admin Dashboard**: A dedicated administrative interface for managing platform content. Admins can oversee all recipes, manage users (including banning functionality), and maintain the taxonomies for Categories, Cuisines, and Ingredients.
+* Provide a centralized platform for discovering and sharing recipes.
+* Enable users to create, edit, and manage their own recipes.
+* Organize recipes by categories, cuisines, and food types.
+* Maintain structured ingredient quantities and preparation steps.
+* Implement secure authentication and role-based access control.
+* Provide administrative tools for content moderation and platform management.
+* Demonstrate Laravel development, MVC architecture, database relationships, and CRUD operations.
 
-## User Roles
+---
 
-* **Guest (Unauthenticated)**
-  * Can view the home page and browse the recipe catalog.
-  * Can use search and filter functionalities.
-  * Can view detailed recipe pages and user profiles.
-  * Must register or log in to interact further.
+# Features
 
-* **User (Authenticated)**
-  * Has all Guest privileges.
-  * Can access a personal dashboard ("My Recipes").
-  * Can create, edit, and delete their own recipes.
-  * Can like and unlike recipes.
-  * Can update their profile information and avatar.
+## User Module
 
-* **Admin**
-  * Has all User privileges.
-  * Has access to the protected `/admin` dashboard.
-  * Can view and manage all registered users (including banning and unbanning accounts).
-  * Can delete any recipe on the platform for moderation purposes.
-  * Can create, update, and delete Categories, Cuisines, and Ingredients.
+* User Registration, Login & Logout
+* Session-Based Authentication
+* User Dashboard and My Recipes
+* Create, Edit, View, and Delete Personal Recipes
+* Upload Recipe Images
+* Add Multiple Ingredients with Quantities and Units
+* Add Sequential Preparation Steps
+* Like and Unlike Recipes
+* Public User Profiles
+* Update Profile Information and Avatar
+* Ownership-Based Authorization
 
-## Complete Project Flow
+---
 
-1. **Discovery**: A user opens the application and lands on the home page, viewing featured popular recipes and categories.
-2. **Exploration**: The user navigates to the recipe catalog, using filters to find specific types of meals (e.g., Vegan Italian dishes).
-3. **Authentication**: To save a favorite recipe or add their own, the user creates an account or logs in.
-4. **Contribution**: The user goes to their dashboard and clicks "Create Recipe".
-5. **Data Entry**: The user fills out a comprehensive form including the recipe name, description, category, cuisine, food type, uploads an image, adds a dynamic list of ingredients with measurements, and writes out the preparation steps.
-6. **Publication**: The data is processed within a database transaction to ensure integrity, and the recipe becomes publicly available.
-7. **Interaction**: Other users discover the new recipe, view the steps, and can "like" it.
-8. **Moderation**: Administrators periodically log into the admin panel to manage taxonomies, review content, and handle user moderation if necessary.
+## Recipe Discovery
 
-## Application Modules
+* Browse All Available Recipes
+* Search Recipes by Name
+* Filter Recipes by Category
+* Filter Recipes by Cuisine
+* Filter by Food Type (Vegetarian, Non-Vegetarian, Vegan)
+* Sort Recipes by Popularity or Recency
+* View Detailed Recipe Information
+* Display Ingredients and Preparation Instructions
 
-* **Authentication**: Handles user registration, login, and logout flows.
-* **Home**: The landing page showcasing top content and categories.
-* **Recipe Module**: Core functionality including the recipe listing page, detailed recipe view, and the creation/editing interfaces.
-* **Profile Module**: Public-facing user profile pages and private profile editing settings.
-* **Dashboard (My Recipes)**: A private management area for users to oversee their submitted content.
-* **Admin Panel**: A restricted area containing modules for User Management, Recipe Moderation, Category Management, Cuisine Management, and Ingredient Management.
+---
 
-## Functional Details
+## Admin Module
 
-* **Search/Filter Functionality**: The recipe listing page uses Eloquent queries to filter results based on `category_id`, `cuisine_id`, and `food_type`. A search bar uses `LIKE` queries against the recipe name.
-* **Dynamic Forms**: The recipe creation/edit forms support adding multiple ingredients and preparation steps dynamically.
-* **Data Processing (Transactions)**: When saving a recipe, `DB::transaction` is utilized to ensure that the core recipe, its pivot table relations (ingredients), and its related models (steps) are all saved successfully, preventing orphaned data if an error occurs mid-process.
-* **Relationships**:
-  * One-to-Many: User -> Recipes, Recipe -> Preparation Steps, Recipe -> Likes, User -> Likes.
-  * Many-to-Many: Recipe <-> Ingredients (via `recipe_ingredient` pivot table tracking `quantity` and `unit`).
-  * Belongs-To: Recipe -> Category, Recipe -> Cuisine.
-* **Image Uploads**: Recipe and profile images are validated for mime type and size, then stored securely in the `public` storage disk.
+* Admin Dashboard
+* Manage Registered Users
+* Ban and Unban User Accounts
+* View and Moderate Recipes
+* Delete Inappropriate Recipes
+* Manage Categories (Add, Edit, Delete)
+* Manage Cuisines (Add, Edit, Delete)
+* Manage Ingredients (Add, Edit, Delete)
+* Protected Administrative Routes
+* Role-Based Access Control
 
-## Technology Stack
+---
 
-* **Backend**: PHP 8.2+, Laravel 12.0
-* **Frontend**: Blade Templates, Tailwind CSS 4.0
-* **Development Tools**: Vite (Asset Bundling), Laravel Pint (Code Styling), Pest/PHPUnit (Testing)
-* **Database**: SQLite (Default configuration, compatible with MySQL/PostgreSQL)
+# Technology Stack
 
-## System Architecture
+## Backend
 
-The application follows a standard monolithic Model-View-Controller (MVC) architecture using the Laravel framework:
-1. **Frontend (Views)**: Blade templates styled with Tailwind CSS render the user interface.
-2. **Routing**: `routes/web.php` directs incoming HTTP requests through appropriate middleware.
-3. **Controllers**: Handle business logic, process incoming request data, interact with models, and return views or redirects (e.g., `RecipeController`, `AdminUserController`).
-4. **Models (Eloquent ORM)**: Represent database tables and define relationships (e.g., `Recipe`, `User`, `Ingredient`).
-5. **Database**: Relational database storing the application state.
+* PHP 8.2+
+* Laravel 12
+* Eloquent ORM
+* Laravel Middleware
+* Laravel Validation
 
-## Database Structure
+## Database
 
-| Table | Main Fields | Relationships / Purpose |
-| :--- | :--- | :--- |
-| `users` | `id`, `name`, `email`, `password`, `role`, `status`, `banned_at` | Stores user accounts, roles, and moderation status. |
-| `recipes` | `id`, `user_id`, `category_id`, `cuisine_id`, `name`, `food_type` | Core recipe entity. Belongs to User, Category, Cuisine. |
-| `categories` | `id`, `name`, `description` | Taxonomy for grouping recipes (e.g., Breakfast, Dessert). |
-| `cuisines` | `id`, `name`, `description` | Taxonomy for origin of recipes (e.g., Italian, Mexican). |
-| `ingredients` | `id`, `name` | Dictionary of unique ingredients. |
-| `recipe_ingredient` | `recipe_id`, `ingredient_id`, `quantity`, `unit` | Pivot table linking recipes to ingredients with measurements. |
-| `preparation_steps`| `id`, `recipe_id`, `step_number`, `instruction` | Sequential instructions for a specific recipe. |
-| `likes` | `id`, `user_id`, `recipe_id` | Tracks which users have liked which recipes. |
+* MySQL
+* SQLite (Supported through database configuration)
 
-## API Documentation
+## Frontend
 
-This project does not currently expose a public API. All interactions are handled via standard server-side rendered web routes and form submissions.
+* HTML5
+* CSS3
+* Blade Templates
+* Tailwind CSS 4
+* JavaScript
 
-## Project Structure
+## Development Tools
 
-* `app/Http/Controllers/`: Contains the application logic. Subdirectory `Admin/` holds controllers specific to the admin panel.
-* `app/Models/`: Contains Eloquent ORM classes defining data structure and relationships.
-* `database/migrations/`: PHP classes that define and construct the database schema.
-* `resources/views/`: Contains all Blade templates, organized into folders like `admin`, `auth`, `recipes`, `profile`, and `layouts`.
-* `routes/web.php`: The central file where all application URLs are registered and assigned to controllers.
-* `public/`: The web root directory containing the `index.php` entry point and compiled CSS/JS assets.
+* Composer
+* Node.js & npm
+* Vite
+* Laravel Pint
+* PHPUnit / Pest
+* Git & GitHub
 
-## Authentication & Authorization
+---
 
-* **Authentication**: Handled via Laravel's built-in session-based authentication system. Users register with an email and password.
-* **Roles**: The system relies on a `role` column on the `users` table, which can be `user` or `admin`.
-* **Status**: A `status` column tracks if a user is `active` or `banned`.
-* **Middleware Protection**:
-  * `auth`: Restricts routes (like dashboard, recipe creation) to logged-in users only.
-  * `guest`: Restricts routes (like login/register forms) to unauthenticated users.
-  * `admin`: A custom middleware ensuring only users with the `admin` role can access the `/admin` prefix.
-  * `banned`: A custom middleware that prevents users with a `banned` status from accessing protected routes.
-* **Ownership Authorization**: Controllers manually verify ownership before allowing updates or deletions (e.g., ensuring a user can only edit their own recipe).
+# PHP & Laravel Concepts Demonstrated
 
-## Validation & Security
+* Object-Oriented Programming (OOP)
+* Model-View-Controller (MVC) Architecture
+* CRUD Operations
+* Eloquent ORM and Database Relationships
+* One-to-Many and Many-to-Many Relationships
+* Database Transactions using `DB::transaction`
+* Form Validation
+* Session-Based Authentication
+* Middleware and Role-Based Authorization
+* CSRF Protection
+* Password Hashing
+* File Upload Validation and Storage
+* Query Builder and Search Filtering
+* Blade Layouts and Template Inheritance
+* Dynamic Form Fields
+* Exception Handling
 
-* **Input Validation**: All incoming data from forms (registration, recipe creation, profile updates) is strictly validated in controllers using Laravel's validation rules (e.g., ensuring arrays are not empty, strings meet length requirements, numbers are positive).
-* **CSRF Protection**: All POST, PUT, and DELETE requests are protected against Cross-Site Request Forgery using automatic token generation and verification.
-* **Password Handling**: Passwords are securely hashed using bcrypt before being stored in the database.
-* **File Upload Security**: Uploaded files are validated against allowed mime types (`jpg`, `jpeg`, `png`, `webp`) and file sizes before being accepted and stored in the application.
-* **SQL Injection Prevention**: The use of Eloquent ORM and query builder methods automatically uses PDO parameter binding, preventing SQL injection vulnerabilities.
+---
 
-## Installation & Setup
+# Project Structure
 
-To run SavorNest locally, you need PHP 8.2+, Composer, and Node.js installed.
+```text
+SavorNest/
+│
+├── app/
+│   ├── Http/
+│   │   ├── Controllers/
+│   │   │   └── Admin/
+│   │   └── Middleware/
+│   ├── Models/
+│   └── Providers/
+│
+├── bootstrap/
+├── config/
+├── database/
+│   ├── factories/
+│   ├── migrations/
+│   └── seeders/
+│
+├── public/
+│   ├── css/
+│   └── index.php
+│
+├── resources/
+│   ├── css/
+│   ├── js/
+│   └── views/
+│       ├── admin/
+│       ├── auth/
+│       ├── categories/
+│       ├── dashboard/
+│       ├── layouts/
+│       ├── profile/
+│       └── recipes/
+│
+├── routes/
+│   └── web.php
+│
+├── storage/
+├── tests/
+├── .env.example
+├── .gitignore
+├── artisan
+├── composer.json
+├── composer.lock
+├── package.json
+├── phpunit.xml
+├── README.md
+└── vite.config.js
+```
 
-1. **Clone the repository**
-2. **Install PHP dependencies:**
-   ```bash
-   composer install
-   ```
-3. **Install frontend dependencies:**
-   ```bash
-   npm install
-   ```
-4. **Environment Setup:**
-   Copy the example environment file and create your own `.env` file.
-   ```bash
-   cp .env.example .env
-   ```
-5. **Generate Application Key:**
-   ```bash
-   php artisan key:generate
-   ```
-6. **Database Setup:**
-   By default, the `.env.example` is configured for SQLite. Create an empty SQLite database file, then run migrations.
-   ```bash
-   touch database/database.sqlite
-   php artisan migrate
-   ```
-7. **Storage Link:**
-   Create a symbolic link to make uploaded images publicly accessible.
-   ```bash
-   php artisan storage:link
-   ```
-8. **Run the Application:**
-   Start the Vite development server for frontend assets and the Laravel server.
-   ```bash
-   npm run dev
-   # In a separate terminal window:
-   php artisan serve
-   ```
-   The application will be available at `http://localhost:8000`.
+---
 
-## Configuration
+# Database Design
 
-Important configuration variables in the `.env` file:
+SavorNest uses a relational database structure to organize users, recipes, ingredients, and related information.
 
-* **Required:**
-  * `DB_CONNECTION`: Set your database type (sqlite, mysql, pgsql).
-  * `APP_URL`: Set to your local development URL (e.g., `http://localhost:8000`).
-* **Optional:**
-  * `MAIL_MAILER` / `MAIL_HOST`: Configure these if you wish to implement email sending for password resets (currently uses `log` driver).
+## Database Tables
 
-## Usage
+* **Users** – Stores user accounts, roles, and account status.
+* **Recipes** – Stores recipe details, descriptions, food types, and associated user information.
+* **Categories** – Maintains recipe categories such as breakfast and desserts.
+* **Cuisines** – Stores cuisine classifications such as Italian and Mexican.
+* **Ingredients** – Maintains a collection of ingredients.
+* **Recipe Ingredients** – Connects recipes with ingredients and stores quantities and units.
+* **Preparation Steps** – Stores numbered preparation instructions for each recipe.
+* **Likes** – Records the recipes liked by individual users.
 
-* **Standard User Workflow**: Register an account. Navigate to the "Recipes" tab to browse. Click on your profile dropdown to go to "My Recipes", then click "Create Recipe". Fill out the form, adding ingredients and steps one by one. Submit the form to publish your recipe.
-* **Admin Workflow**: Register an account. You will need to manually change your role to `admin` in the database to gain initial access. Once granted, an "Admin Dashboard" link will appear in the navigation. Click it to manage the platform's taxonomies and moderate users.
+## Relationships
 
-## Future Scope
+* One User → Multiple Recipes
+* One Recipe → Multiple Preparation Steps
+* One Recipe → Multiple Likes
+* One User → Multiple Likes
+* One Category → Multiple Recipes
+* One Cuisine → Multiple Recipes
+* One Recipe ↔ Multiple Ingredients
+* One Ingredient ↔ Multiple Recipes
 
-* Implementation of a rating and review system for recipes.
-* Ability for users to comment on recipes.
-* Social features such as following other chefs and a customized activity feed.
-* Meal planning and grocery list generation based on selected recipes.
+## Data Integrity
 
-## Project Status
+* Database transactions maintain consistency when saving recipes and their related data.
+* Foreign key relationships maintain connections between related records.
+* Eloquent ORM manages database interactions and model relationships.
+* Validation helps prevent invalid recipe and ingredient data.
 
-SavorNest is fully functional with core features implemented. The platform supports user authentication, complex recipe creation (with dynamic ingredients and steps), a complete categorization system, and a robust administrative panel for moderation and taxonomy management. All described features are currently operational.
+---
+
+# Authentication & Authorization
+
+* Session-Based Authentication
+* User Registration and Login
+* Secure Password Hashing
+* Protected Routes using `auth` Middleware
+* Guest-Only Routes using `guest` Middleware
+* Custom `admin` Middleware for administrative access
+* Custom `banned` Middleware for restricting banned accounts
+* Ownership Checks for Recipe Updates and Deletions
+* Role-Based Access for Users and Administrators
+
+---
+
+# Security & Validation
+
+* Server-Side Form Validation
+* CSRF Protection for State-Changing Requests
+* Password Hashing using Laravel's hashing facilities
+* Image Upload Validation for Supported Formats
+* File Size Validation
+* Eloquent ORM and Parameter Binding to Help Prevent SQL Injection
+* Middleware-Based Route Protection
+* Authorization Checks for Restricted Operations
+
+---
+
+# Setup Instructions
+
+## Prerequisites
+
+* PHP 8.2+
+* Composer
+* Node.js and npm
+* MySQL or SQLite
+* Git
+
+---
+
+## Clone Repository
+
+```bash
+git clone https://github.com/snehabaviskar22/SavorNest.git
+```
+
+```bash
+cd SavorNest
+```
+
+---
+
+## Install Dependencies
+
+Install PHP dependencies:
+
+```bash
+composer install
+```
+
+Install frontend dependencies:
+
+```bash
+npm install
+```
+
+---
+
+## Configure Environment Variables
+
+Create a local `.env` file by copying the example configuration.
+
+Windows PowerShell:
+
+```powershell
+Copy-Item .env.example .env
+```
+
+Generate the Laravel application key:
+
+```bash
+php artisan key:generate
+```
+
+Configure the database connection in `.env` according to your local setup.
+
+For MySQL, configure the relevant values:
+
+```env
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=savornest
+DB_USERNAME=root
+DB_PASSWORD=your_database_password
+```
+
+Replace the database credentials with your own local settings.
+
+---
+
+## Database Setup
+
+Create the `savornest` database in MySQL Workbench or your preferred database tool.
+
+Run the migrations:
+
+```bash
+php artisan migrate
+```
+
+If the application uses database seeders to populate initial categories, cuisines, ingredients, or sample records, run:
+
+```bash
+php artisan db:seed
+```
+
+---
+
+## Configure Storage
+
+Create the symbolic link for publicly accessible uploaded images:
+
+```bash
+php artisan storage:link
+```
+
+---
+
+## Run the Project
+
+Start the Vite development server:
+
+```bash
+npm run dev
+```
+
+Open a separate terminal in the project directory and start Laravel:
+
+```bash
+php artisan serve
+```
+
+Open the application in your browser:
+
+```text
+http://127.0.0.1:8000
+```
+
+---
+
+# Application Workflow
+
+1. **Registration:** Users create an account and log in.
+2. **Recipe Discovery:** Users browse, search, and filter available recipes.
+3. **Recipe Creation:** Authenticated users enter recipe details, upload an image, add ingredients, and provide preparation steps.
+4. **Recipe Publication:** Validated recipe information and its related data are saved to the database.
+5. **Community Interaction:** Other users discover recipes and like their favorites.
+6. **Profile Management:** Users update their profiles and manage their published recipes.
+7. **Administration:** Administrators manage users, moderate recipes, and maintain categories, cuisines, and ingredients.
+
+---
+
+# Future Enhancements
+
+* Recipe Rating and Review System
+* Comments and Discussions on Recipes
+* Follow Other Chefs
+* Personalized Recipe Recommendations
+* Meal Planning and Grocery List Generation
+* Email Notifications
+* Recipe Sharing and Social Features
+
+---
+
+# Author
+
+**Sneha Baviskar**
+
+MCA Student  
+Savitribai Phule Pune University
+
+---
+
+# License
+
+This project is developed for academic and educational purposes.
